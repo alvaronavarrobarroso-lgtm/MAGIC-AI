@@ -15,7 +15,7 @@ load_dotenv(BASE_DIR / ".env")
 api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
-    raise RuntimeError("No se encontró GEMINI_API_KEY en .env")
+    raise RuntimeError("No se encontró GEMINI_API_KEY")
 
 client = genai.Client(api_key=api_key)
 
@@ -43,7 +43,8 @@ def chat(request: ChatRequest):
     try:
         contents = []
 
-        for item in request.history:
+        # Utilizamos solo los últimos 6 mensajes
+        for item in request.history[-6:]:
             role = item.get("role")
             content = item.get("content")
 
@@ -60,17 +61,32 @@ def chat(request: ChatRequest):
 
         response = client.models.generate_content(
             model="gemini-3.5-flash",
-            contents=contents
+            contents=contents,
+            config={
+                "max_output_tokens": 400
+            }
         )
 
         return {"reply": response.text}
 
     except Exception as e:
-        print("Error de Gemini:", str(e))
-        raise HTTPException(status_code=500, detail=str(e))
+        error = str(e)
+        print("Error de Gemini:", error)
+
+        # Mensaje especial cuando se agota la cuota
+        if "429" in error or "RESOURCE_EXHAUSTED" in error:
+            return {
+                "reply": "✨ ¡Has utilizado todos los mensajes gratuitos de MAGIC AI por hoy! Vuelve mañana y seguiremos creando magia juntos. 💜"
+            }
+
+        raise HTTPException(
+            status_code=500,
+            detail="Ha ocurrido un problema. Inténtalo de nuevo."
+        )
+
 
 app.mount(
     "/",
-    StaticFiles(directory="frontend", html=True),
+    StaticFiles(directory=str(BASE_DIR / "frontend"), html=True),
     name="frontend"
 )
