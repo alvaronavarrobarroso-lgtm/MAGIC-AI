@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MAGIC AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <header class="topbar">
+
+        <button id="menuToggle" class="icon-button">
+            ☰
+        </button>
+
+        <div class="brand">
+            MAGIC <span>AI</span>
+        </div>
+
+        <button id="newChat" class="new-chat">
+            ＋ Nuevo chat
+        </button>
+
+    </header>
+
+
+    <!-- FONDO DEL MENÚ -->
+    <div id="menuBackdrop" class="backdrop"></div>
+
+
+    <!-- MENÚ LATERAL -->
+    <aside id="sideMenu" class="side-menu" aria-hidden="true">
+
+        <div class="menu-header">
+
+            <div class="brand">
+                MAGIC <span>AI</span>
+            </div>
+
+            <button id="menuClose" class="icon-button">
+                ✕
+            </button>
+
+        </div>
+
+        <button id="sideNewChat" class="menu-action">
+            ＋ Nuevo chat
+        </button>
+
+        <p class="menu-label">
+            HISTORIAL
+        </p>
+
+        <div id="historyList" class="history-list"></div>
+
+        <div class="menu-bottom">
+
+            <button id="themeOption" class="menu-action">
+                ☼ Cambiar apariencia
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+        <section id="chat" class="chat-area">
+
+            <!-- BIENVENIDA -->
+            <div id="welcome" class="welcome">
+
+                <div class="welcome-tag">
+                    ✦ TU INTELIGENCIA ARTIFICIAL
+                </div>
+
+                <!-- TITULO MAGIC -->
+                <h1 class="magic-title">
+                    MAGIC
+                </h1>
+
+                <!-- ROBOT 3D -->
+                <div class="robot-3d-wrap">
+
+                    <div
+                        id="robot3D"
+                        aria-label="Robot 3D de MAGIC AI">
+                    </div>
+
+                </div>
+
+                <!-- TEXTO DEBAJO DEL ROBOT -->
+                <p class="robot-caption">
+                    MAGIC AI <span>•</span> Siempre a tu lado
+                </p>
+
+                <!-- SUGERENCIAS -->
+                <div class="suggestions">
+
+                    <button
+                        class="suggestion"
+                        data-prompt="Dame ideas creativas">
+                        ✧ Ideas creativas
+                    </button>
+
+                    <button
+                        class="suggestion"
+                        data-prompt="Ayúdame a aprender algo nuevo">
+                        ⌘ Aprender algo
+                    </button>
+
+                    <button
+                        class="suggestion"
+                        data-prompt="Ayúdame con un proyecto">
+                        ✦ Mis proyectos
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CAJA PARA ESCRIBIR -->
+        <form id="chatForm" class="chat-form">
+
+            <div class="input-container">
+
+                <input
+                    type="text"
+                    id="message"
+                    placeholder="Pregúntale lo que quieras a MAGIC..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit" id="send">
+                    ➤
+                </button>
+
+            </div>
+
+            <p class="disclaimer">
+                MAGIC AI puede cometer errores. Comprueba la información importante.
+            </p>
+
+        </form>
+
+    </main>
+
+
+    <!-- AVISOS -->
+    <div id="notice" class="notice"></div>
+
+
+    <!-- JAVASCRIPT 3D Y CHAT -->
+    <script type="module" src="app.js"></script>
+
+</body>
+
+</html>
